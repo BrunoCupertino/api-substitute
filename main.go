@@ -19,9 +19,10 @@ func (v *valueFlags) Set(value string) error {
 }
 
 var (
-	port      string
-	routes    valueFlags
-	responses valueFlags
+	port        string
+	routes      valueFlags
+	responses   valueFlags
+	responseMap map[string]string
 )
 
 func main() {
@@ -36,6 +37,8 @@ func main() {
 	})
 	fmt.Println("route /ping registered")
 
+	responseMap = make(map[string]string, len(routes))
+
 	for i, ep := range routes {
 		http.HandleFunc(ep, func(w http.ResponseWriter, r *http.Request) {
 			w.Header().Set("Content-Type", "application/json")
@@ -45,8 +48,9 @@ func main() {
 
 			fmt.Printf("*** NEW REQUEST\n %s\n***\n", reqStr)
 
-			fmt.Fprintf(w, responses[i])
+			fmt.Fprintf(w, responseMap[r.RequestURI])
 		})
+		responseMap[ep] = responses[i]
 		fmt.Printf("route %s registered!\n", ep)
 	}
 
