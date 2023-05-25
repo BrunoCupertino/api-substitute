@@ -17,7 +17,7 @@ curl http://localhost:2020/hello
 ```
 it will return:
 ```json
-{message: "world"}
+{result: "world"}
 ```
 
 besides the api-subsitute will print all informations about the request, including the raw body it is usefull to check the request.

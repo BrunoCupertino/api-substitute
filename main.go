@@ -51,7 +51,7 @@ func main() {
 			fmt.Fprintf(w, responseMap[r.RequestURI])
 		})
 		responseMap[ep] = responses[i]
-		fmt.Printf("route %s registered!\n", ep)
+		fmt.Printf("route %s registered\n", ep)
 	}
 
 	http.ListenAndServe(fmt.Sprintf(":%s", port), nil)
