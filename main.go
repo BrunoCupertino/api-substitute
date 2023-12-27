@@ -35,6 +35,7 @@ func main() {
 	http.HandleFunc("/ping", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "pong")
 	})
+
 	fmt.Println("route /ping registered")
 
 	responseMap = make(map[string]string, len(routes))
@@ -50,7 +51,9 @@ func main() {
 
 			fmt.Fprintf(w, responseMap[r.RequestURI])
 		})
+
 		responseMap[ep] = responses[i]
+
 		fmt.Printf("route %s registered\n", ep)
 	}
 
